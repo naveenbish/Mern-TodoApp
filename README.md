@@ -7,4 +7,4 @@ It has the following features:-
 - Anyone can make their Todo as done
 
 # Bug Fixes
-- Big1 : While adding Empty TODO, Backend Crashing.
+- Bug1 : While adding Empty TODO, Backend Crashing.
