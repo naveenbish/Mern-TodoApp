@@ -26,7 +26,7 @@ export function CreateTodo(props) {
   };
 
   return (
-      <form onSubmit={handleSubmit} className="border p-3 rounded-2xl">
+      <form onSubmit={handleSubmit} className="border p-5 rounded-2xl w-[450px]">
       <div className="font-bold text-white border-blue-400 border-b-2 w-fit">
         Add Todo
       </div>

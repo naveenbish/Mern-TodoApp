@@ -42,19 +42,19 @@ export function Todos() {
       {todos.map((todo, index) => {
         return (
           <div className='pb-6' key={index}>
+            <Edit className="pt-0" todo={todo}/>
             <div className='flex justify-between'>
-              <div>
+              <div className='w-[80%]'>
                 {/* update Todo Button  */}
-                <div className='flex text-xl font-bold text-[#35373e]'>
-                  <Edit todo={todo} />
+                <div className='break-all flex text-xl font-bold text-white'>
                   {todo.title}
                 </div>
                 {/* Description */}
-                <div className='font-bold text-gray-500 ml-7'>
+                <div className='font-bold break-words text-gray-500'>
                   {todo.description}
                 </div>
               </div>
-              <div className='flex justify-center gap-3'>
+              <div className='flex justify-center gap-3 w-[20%]'>
                 {/* Complete and incomplete button */}
                 <div onClick={() => updateCompleted(todo)}>
                   {isCompleted(todo.completed)}

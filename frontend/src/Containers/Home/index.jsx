@@ -7,11 +7,11 @@ import { RecoilRoot } from 'recoil';
 function Home() {
   return (
     <RecoilRoot>
-      <div>
+      <div className='bg-[#37694A] w-[100vw]'>
         {/* Upper Color Bar  */}
         <ColorBar />
-        <div className='flex flex-col w-fit min-h-[95vh] m-auto justify-center py-20'>
-          <div className='border shadow-[0_0_10px_rgba(0,0,0,0.7)] p-10 rounded-[35px] max-w-[500px] m-10 min-h-[700px]'>
+        <div className='flex flex-col w-[900px] min-h-[95vh] justify-center m-auto'>
+          <div className='border shadow-[0_0_10px_rgba(0,0,0,0.7)] p-10 rounded-[35px] m-10 min-h-[700px] bg-green-950'>
             <TodoHead />
             <CreateTodo />
 

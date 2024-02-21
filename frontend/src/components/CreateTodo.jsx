@@ -22,15 +22,15 @@ export function CreateTodo() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='border p-3 rounded-2xl'>
-      <div className='font-bold text-gray-500 border-blue-400 border-b-2 w-fit'>
+    <form onSubmit={handleSubmit} className='border p-3 rounded-2xl w-full'>
+      <div className='font-bold text-gray-500 text-2xl border-blue-400 border-b-2 mb-5'>
         Add Todo
       </div>
       <div className='flex justify-between'>
         <input
           id='title'
           placeholder='Add Title'
-          className='border-blue-gray-200 text-blue-gray-700 placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-2xl outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0'
+          className='border-blue-gray-200 text-white placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-2xl outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0'
           onChange={(e) => {
             const value = e.target.value;
             setTitle(value);
@@ -38,10 +38,10 @@ export function CreateTodo() {
         />
       </div>
       <div className='flex justify-between'>
-        <input
+        <textarea
           id='description'
           placeholder='Add Description'
-          className='border-blue-gray-200 text-gray-500 placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-lg outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0'
+          className='border-blue-gray-200 text-white placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-lg outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0'
           onChange={(e) => {
             const value = e.target.value;
             setDescription(value);

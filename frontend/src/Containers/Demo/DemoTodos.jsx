@@ -7,9 +7,8 @@ import Popup from "reactjs-popup";
 import EditSvg from "./demoassets/edit.svg";
 
 export function Todos() {
-  // const [value, setValue] = useState(0);
-  const [title, setTitle] = useState("Title");
-  const [description, setDescription] = useState("Desc");
+  const [title, setTitle] = useState('Title');
+  const [description, setDescription] = useState('Description');
   const [num, setNum] = useState(1);
   const [todos, setTodos] = useState([
     {
@@ -21,7 +20,6 @@ export function Todos() {
   ]);
 
   const addTodo = (todo) => {
-    // console.log(todo)
     if (!todo.title || /^\s*$/.test(todo.title)) {
       return;
     }
@@ -32,7 +30,6 @@ export function Todos() {
     todo.id = num;
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
-    console.log(todos);
   };
 
   function updateDone(todo) {

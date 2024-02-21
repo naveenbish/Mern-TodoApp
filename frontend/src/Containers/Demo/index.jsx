@@ -17,9 +17,8 @@ function Demo() {
         </div>
         <div className="flex flex-col w-full min-h-[80vh] m-auto items-center justify-center py-20 bg-[#37694A]">
           <div className="text-black text-5xl font-extrabold p-2 border-black border-b-2 mb-5">Demo</div>
-          <div className="border shadow-[0_0_10px_rgba(0,0,0,0.7)] p-5 rounded-[35px] max-w-[500px] mb-10 min-h-[700px] bg-[#37694A]">
+          <div className="border shadow-[0_0_10px_rgba(0,0,0,0.7)] p-5 rounded-[35px] w-[500px] mb-10 min-h-[700px] bg-[#37694A]">
             <TodoHead />
-            {/* <CreateTodo></CreateTodo> */}
             <Todos />
           </div>
         </div>
