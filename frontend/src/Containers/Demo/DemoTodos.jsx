@@ -7,40 +7,49 @@ import Popup from "reactjs-popup";
 import EditSvg from "./demoassets/edit.svg";
 
 export function Todos() {
-  const [value, setValue] = useState();
+  // const [value, setValue] = useState(0);
   const [title, setTitle] = useState("Title");
   const [description, setDescription] = useState("Desc");
+  const [num, setNum] = useState(1);
   const [todos, setTodos] = useState([
     {
-      id: 1,
+      id: 0,
       title: "Go To Gym",
       desc: "Elevate your well-being with invigorating workouts and top-notch equipment. Got to the gym and unlock a fitter, healthier you! 🏋️‍♀️💪",
-      done: false,
+      done: 0,
     },
   ]);
 
   const addTodo = (todo) => {
+    // console.log(todo)
     if (!todo.title || /^\s*$/.test(todo.title)) {
       return;
     }
     if (!todo.desc || /^\s*$/.test(todo.desc)) {
       return;
     }
+    setNum(num + 1);
+    todo.id = num;
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
+    console.log(todos);
   };
 
-  function updateDone(done) {
-    if (done == true) {
-      setValue(false);
+  function updateDone(todo) {
+    if (todo.done == 0) {
+      todo.done = 1;
     } else {
-      setValue(true);
+      todo.done = 0;
     }
+    const updatedTodo = todos.slice(0);
+    setTodos(updatedTodo)
   }
 
-  function isCompleted() {
-    if (value == true) {
-      return <img src={TickSvgGreen} alt="tick.svg" className="cursor-pointer" />
+  function isCompleted(todo) {
+    if (todo.done == 1) {
+      return (
+        <img src={TickSvgGreen} alt="tick.svg" className="cursor-pointer" />
+      );
     } else {
       return <img src={TickSvgRed} alt="tick.svg" className="cursor-pointer" />;
     }
@@ -64,7 +73,7 @@ export function Todos() {
         todo.desc = description;
       }
     });
-    setTodos([...todos])
+    setTodos([...todos]);
   };
 
   return (
@@ -144,9 +153,7 @@ export function Todos() {
               </div>
               <div className="flex justify-center gap-3 w-[20%]">
                 {/* Complete and incomplete button */}
-                <div onClick={() => updateDone(todo.done)}>
-                  {isCompleted()}
-                </div>
+                <div onClick={() => updateDone(todo)}>{isCompleted(todo)}</div>
                 {/* Delete Button : To delete the Particular Element form the Todos  */}
                 <div onClick={() => deleteTodo(todo.id)}>
                   <img
