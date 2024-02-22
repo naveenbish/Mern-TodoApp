@@ -20,7 +20,7 @@ export function Todos() {
   }
 
   async function updateCompleted(todos) {
-    await fetch('http://localhost:3000/completed', {
+    await fetch('http://65.0.92.246:3000/completed', {
       method: 'PUT',
       body: JSON.stringify({ id: todos._id }),
       headers: { 'Content-Type': 'application/json' },
@@ -29,7 +29,7 @@ export function Todos() {
   }
 
   async function deleteTodo(todos) {
-    await fetch('http://localhost:3000/delete', {
+    await fetch('http://65.0.92.246:3000/delete', {
       method: 'PUT',
       body: JSON.stringify({ id: todos._id }),
       headers: { 'Content-Type': 'application/json' },

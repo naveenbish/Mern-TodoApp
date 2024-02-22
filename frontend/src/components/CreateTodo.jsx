@@ -8,7 +8,7 @@ export function CreateTodo() {
   const { getTodos } = useGetTodos();
 
   async function AddTodos() {
-    await fetch('http://localhost:3000/todo', {
+    await fetch('http://65.0.92.246:3000/todo', {
       method: 'POST',
       body: JSON.stringify({ title, description }),
       headers: { 'Content-Type': 'application/json' },

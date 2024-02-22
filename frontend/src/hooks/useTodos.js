@@ -6,7 +6,7 @@ export const useGetTodos = () => {
   const [todos, setTodos] = useRecoilState(todoAtom);
 
   const getTodos = useCallback(async () => {
-    const res = await fetch('http://localhost:3000/todos');
+    const res = await fetch('http://65.0.92.246:3000/todos');
     const json = await res.json();
     setTodos(json.todos);
   }, [setTodos]);

@@ -9,7 +9,7 @@ export default function Edit({ todo }) {
   const { getTodos } = useGetTodos();
 
   async function UpdateTodos() {
-    await fetch('http://localhost:3000/update', {
+    await fetch('http://65.0.92.246:3000/update', {
       method: 'PUT',
       body: JSON.stringify({ id: todo._id, title, description }),
       headers: { 'Content-Type': 'application/json' },
