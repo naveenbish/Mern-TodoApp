@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export default function SignupSide() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="mt-[120px] text-center">
@@ -17,7 +20,7 @@ export default function SignupSide() {
             placeholder="Password"
             className="border-blue-gray-200 text-black placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 border-b bg-transparent font-mono font-bold text-xl outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0"
           />
-          <button className="border m-auto w-[100px] bg-[#37694A] text-xl font-semibold p-2 rounded-md">Sign up</button>
+          <button className="border m-auto w-[100px] bg-[#37694A] text-xl font-semibold p-2 rounded-md" onClick={()=>navigate("/home")}>Sign up</button>
         </form>
         <div>Already have an Account? Sign in</div>
       </div>
