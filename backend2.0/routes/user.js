@@ -8,7 +8,7 @@ const { JWT_SECRET } = require("../config");
 router.get("/", (req, res) => {
   const data = req.body.username;
   console.log(data)
-  res.send("Hello, I am user here.", data);
+  res.send("Hello, I am user here. Yo Hell yeah.", data);
 });
 
 const signupBody = zod.object({
