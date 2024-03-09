@@ -1,7 +1,7 @@
 import TickSvgRed from "./demoassets/tick_red.svg";
 import TickSvgGreen from "./demoassets/tick_green.svg";
 import DeleteSvg from "./demoassets/delete.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreateTodo } from "./DemoCreateTodo";
 import Popup from "reactjs-popup";
 import EditSvg from "./demoassets/edit.svg";
@@ -72,7 +72,6 @@ export function Todos() {
     });
     setTodos([...todos]);
   };
-
   return (
     <div className="py-3 w-fit">
       <CreateTodo onSubmit={addTodo} />

@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import SigninPopup from "./SigninPopup";
+import { useState } from "react";
 
 export default function SignupSide() {
   const navigate = useNavigate();
+  const [showSignin, setShowSignin] = useState(false);
   return (
     <>
       <div className="mt-[120px] text-center">
@@ -22,8 +25,9 @@ export default function SignupSide() {
           />
           <button className="border m-auto w-[100px] bg-[#37694A] text-xl font-semibold p-2 rounded-md" onClick={()=>navigate("/home")}>Sign up</button>
         </form>
-        <div>Already have an Account? Sign in</div>
+        <div>Already have an Account? <button className="bg-[#37694A] p-2 rounded-md font-bold" onClick={()=>setShowSignin(true)}>Sign in</button></div>
       </div>
+      {showSignin && <SigninPopup onClose={()=>setShowSignin(false)} />}
     </>
   );
 }

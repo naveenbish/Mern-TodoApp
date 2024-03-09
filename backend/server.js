@@ -9,11 +9,11 @@ app.use(express.json());
 //     origin: "http://localhost:5173",
 //   })
 // );
-app.use(cors())
+app.use(cors());
 
 app.post("/todo", async (req, res) => {
   const createPayload = req.body;
-  console.log(createPayload)
+  console.log(createPayload);
   const parsedPayload = createTodo.safeParse(createPayload);
   if (!parsedPayload.success) {
     res.status(411).json({
@@ -26,7 +26,6 @@ app.post("/todo", async (req, res) => {
       msg: "Title can't be blank",
     });
   }
-
 
   // Insert data to mongoDb
   await todo.create({

@@ -1,4 +1,4 @@
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
+import { Route, createHashRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
 import { home} from './routes/routes'
 import Signup from './Containers/Signup'
 import Home from './Containers/Home'
@@ -14,7 +14,7 @@ const routerList = [
   }
 ]
 
-const router = createBrowserRouter(createRoutesFromElements(<>
+const router = createHashRouter(createRoutesFromElements(<>
   {routerList.map((item)=><Route path={item.path} element={item.element} />)}
 </>))
 
