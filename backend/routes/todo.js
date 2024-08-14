@@ -1,19 +1,15 @@
 const express = require("express");
-const app = express();
-const { createTodo, updateTodo } = require("./types");
-const { todo } = require("./db");
-const cors = require("cors");
-app.use(express.json());
-// app.use(
-//   cors({
-//     origin: "http://localhost:5173",
-//   })
-// );
-app.use(cors());
+const router = express.Router();
+const { Todo } = require("../db");
+const { createTodo, updateTodo } = require("../zod/types.js");
+const zod = require("zod");
 
-app.post("/todo", async (req, res) => {
+router.get("/", (req, res) => {
+  res.send("hello todo here");
+});
+
+router.post("/create", async (req, res) => {
   const createPayload = req.body;
-  console.log(createPayload);
   const parsedPayload = createTodo.safeParse(createPayload);
   if (!parsedPayload.success) {
     res.status(411).json({
@@ -28,7 +24,7 @@ app.post("/todo", async (req, res) => {
   }
 
   // Insert data to mongoDb
-  await todo.create({
+  await Todo.create({
     title: createPayload.title,
     description: createPayload.description,
     completed: false,
@@ -39,9 +35,9 @@ app.post("/todo", async (req, res) => {
   });
 });
 
-app.get("/todos", async (req, res) => {
+router.get("/todos", async (req, res) => {
   try {
-    const todos = await todo.find();
+    const todos = await Todo.find();
     res.json({
       todos,
     });
@@ -51,7 +47,7 @@ app.get("/todos", async (req, res) => {
 });
 
 // To update the check button to complete(green) and incomplete(red).
-app.put("/completed", async (req, res) => {
+router.put("/complete", async (req, res) => {
   const updatePayload = req.body;
   const parsedPayload = updateTodo.safeParse(updatePayload);
   if (!parsedPayload.success) {
@@ -60,34 +56,34 @@ app.put("/completed", async (req, res) => {
     });
     return;
   }
-  const todos = await todo.find();
+  const todos = await Todo.find();
   const requestedTodo = todos.map((value) => {
     return {
       id: value._id,
       completed: value.completed,
     };
   });
-  const mappedTodo = requestedTodo.filter((value) => {
+  const mrouteredTodo = requestedTodo.filter((value) => {
     return value.id.valueOf() == req.body.id;
   });
 
-  if (mappedTodo[0].completed == true) {
-    await todo.updateOne(
+  if (mrouteredTodo[0].completed == true) {
+    await Todo.updateOne(
       {
         _id: req.body.id,
       },
       {
         completed: false,
-      }
+      },
     );
   } else {
-    await todo.updateOne(
+    await Todo.updateOne(
       {
         _id: req.body.id,
       },
       {
         completed: true,
-      }
+      },
     );
   }
   res.json({
@@ -96,7 +92,7 @@ app.put("/completed", async (req, res) => {
 });
 
 // To Delete with respect to _id
-app.put("/delete", async (req, res) => {
+router.put("/delete", async (req, res) => {
   const updatePayload = req.body;
   const parsedPayload = updateTodo.safeParse(updatePayload);
   if (!parsedPayload.success) {
@@ -106,21 +102,24 @@ app.put("/delete", async (req, res) => {
     return;
   }
 
-  const todos = await todo.find();
+  const todos = await Todo.find();
   const requestedTodo = todos.map((value) => {
     return {
       id: value._id,
       completed: value.completed,
     };
   });
-  const mappedTodo = requestedTodo.filter((value) => {
+  const mrouteredTodo = requestedTodo.filter((value) => {
     return value.id.valueOf() == req.body.id;
   });
-  console.log(mappedTodo[0].id);
+
+  if (mrouteredTodo.length == 0) {
+    return res.status(404).json({ error: "No Todo Found." });
+  }
 
   // Delete from Database
   try {
-    await todo.deleteOne({ _id: mappedTodo[0].id });
+    await Todo.deleteOne({ _id: mrouteredTodo[0].id });
   } catch (e) {
     console.log(e);
   }
@@ -130,29 +129,28 @@ app.put("/delete", async (req, res) => {
 });
 
 // TO update the TODO basically Title and Description
-app.put("/update", async (req, res) => {
+router.put("/update", async (req, res) => {
   const updatePayload = req.body;
-  const todos = await todo.find();
+  const todos = await Todo.find();
   const requestedTodo = todos.map((value) => {
     return {
       id: value._id,
     };
   });
-  const mappedTodo = requestedTodo.filter((value) => {
+  const mrouteredTodo = requestedTodo.filter((value) => {
     return value.id.valueOf() == req.body.id;
   });
-  await todo.updateMany(
+  await Todo.updateMany(
     {
       _id: updatePayload.id,
     },
     {
       title: updatePayload.title,
       description: updatePayload.description,
-    }
+    },
   );
   res.json({
     msg: "ToDo Updated",
   });
 });
-
-app.listen(3000);
+module.exports = router;

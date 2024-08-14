@@ -14,7 +14,7 @@ export function Todos() {
     {
       id: 0,
       title: "Go To Gym",
-      desc: "Elevate your well-being with invigorating workouts and top-notch equipment. Got to the gym and unlock a fitter, healthier you! 🏋️‍♀️💪",
+      desc: "Elevate your well-being with invigorating workouts and top-notch equipment. Go to the gym and unlock a fitter, healthier you! 🏋️‍♀️💪",
       done: 0,
     },
   ]);

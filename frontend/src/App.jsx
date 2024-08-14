@@ -1,22 +1,24 @@
-import { Route, createHashRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
-import { home} from './routes/routes'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { home, signin } from './routes/routes'
 import Signup from './Containers/Signup'
 import Home from './Containers/Home'
+import Signin from './Containers/Signin'
 
-const routerList = [
+const router = createBrowserRouter([
   {
-    path : '/',
+    path: "/",
     element: <Signup />,
   },
   {
-    path : home,
+    path: home,
     element: <Home />,
+  },
+  {
+    path: signin,
+    element: <Signin />
   }
-]
+])
 
-const router = createHashRouter(createRoutesFromElements(<>
-  {routerList.map((item)=><Route path={item.path} element={item.element} />)}
-</>))
 
 function App() {
   return (

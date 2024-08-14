@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 export function CreateTodo(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  
-  const handleTitleChange = e =>{
+
+  const handleTitleChange = e => {
     setTitle(e.target.value)
   }
-  const handleDescChange = e =>{
+  const handleDescChange = e => {
     setDescription(e.target.value)
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     props.onSubmit({
-      id: Math.floor(Math.random()*10000),
+      id: Math.floor(Math.random() * 10000),
       title: title,
       desc: description,
       done: 0
@@ -26,7 +26,7 @@ export function CreateTodo(props) {
   };
 
   return (
-      <form onSubmit={handleSubmit} className="border p-5 rounded-2xl w-[450px]">
+    <form onSubmit={handleSubmit} className="border p-5 rounded-2xl">
       <div className="font-bold text-white border-blue-400 border-b-2 w-fit">
         Add Todo
       </div>
