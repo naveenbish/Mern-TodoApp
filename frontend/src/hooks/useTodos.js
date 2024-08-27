@@ -7,9 +7,19 @@ export const useGetTodos = () => {
   const [todos, setTodos] = useRecoilState(todoAtom);
 
   const getTodos = useCallback(async () => {
-    const res = await fetch(`${base_url}/todo/todos`);
+    const token = localStorage.getItem("token");
+    const res = await fetch(`${base_url}/todo/todos`, {
+      headers: {
+        Authorization: `${token}`, // Include the JWT token in the Authorization header
+      },
+    });
     const json = await res.json();
-    setTodos(json.todos);
+    // setTodos(json.todos);
+    if (json.todos.length) {
+      setTodos(json.todos);
+    } else {
+      setTodos([]);
+    }
   }, [setTodos]);
 
   useEffect(() => {

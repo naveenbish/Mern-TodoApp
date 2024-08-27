@@ -56,12 +56,12 @@ router.post("/signup", async (req, res) => {
 router.post("/signin", async (req, res) => {
   const { success } = signinBody.safeParse(req.body);
   if (!success) {
-    // return res.status(411).json({
-    //   message: "Please match the requirement / Incorrect inputs",
-    // });
-    return res.json({
-      statusCode: 0,
+    return res.status(411).json({
+      message: "Please match the requirement / Incorrect inputs",
     });
+    // return res.json({
+    //   statusCode: 0,
+    // });
   }
 
   const user = await User.findOne({
@@ -69,8 +69,8 @@ router.post("/signin", async (req, res) => {
   });
 
   try {
-    if (user.email == req.body.email && user.password == req.body.password) {
-      const userId = req.body._id;
+    if (user.email === req.body.email && user.password === req.body.password) {
+      const userId = user._id;
       const token = jwt.sign(
         {
           userId,
@@ -83,19 +83,53 @@ router.post("/signin", async (req, res) => {
         token: token,
       });
     } else {
-      // return res.status(403).json({
-      //   message: "Invalid Creds",
+      return res.status(403).json({
+        message: "Invalid Creds",
+      });
+      // return res.json({
+      //   statusCode: 0,
       // });
+    }
+  } catch (err) {
+    return res.status(411).json({
+      message: "We are facing some issue.",
+    });
+    // return res.json({
+    //   statusCode: 0,
+    // });
+  }
+});
+
+// user Auth
+router.post("/auth", async (req, res) => {
+  const authHeader = req.headers.authorization;
+
+  // if (!authHeader || !authHeader.startsWith("Bearer")) {
+  if (!authHeader) {
+    return res.json({
+      messgage: "no token found",
+      auth: 0,
+    });
+  }
+
+  const token = authHeader;
+
+  try {
+    const decode = jwt.verify(token, JWT_SECRET);
+    if (decode.userId) {
+      const user = await User.findById(decode.userId);
       return res.json({
-        statusCode: 0,
+        auth: 1,
+        email: user.email,
+      });
+    } else {
+      return res.json({
+        auth: 0,
       });
     }
   } catch (err) {
-    // return res.status(411).json({
-    //   message: "Invalid Creds",
-    // });
     return res.json({
-      statusCode: 0,
+      auth: 0,
     });
   }
 });

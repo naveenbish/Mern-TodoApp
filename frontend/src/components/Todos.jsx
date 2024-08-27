@@ -7,6 +7,7 @@ import { base_url } from "../config";
 
 export function Todos() {
   const { getTodos, todos } = useGetTodos();
+  const token = localStorage.getItem("token");
 
   function isCompleted(value) {
     return (
@@ -18,60 +19,70 @@ export function Todos() {
     );
   }
 
-  async function updateCompleted(todos) {
-    await fetch(`${base_url}/todo/completed`, {
+  async function updateCompleted(index) {
+    await fetch(`${base_url}/todo/complete`, {
       method: "PUT",
-      body: JSON.stringify({ id: todos._id }),
-      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ index: index }),
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
     });
     await getTodos();
   }
 
-  async function deleteTodo(todos) {
+  async function deleteTodo(index) {
     await fetch(`${base_url}/todo/delete`, {
       method: "PUT",
-      body: JSON.stringify({ id: todos._id }),
-      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ index: index }),
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
     });
     await getTodos();
   }
 
   return (
     <div className="py-3">
-      {todos.map((todo, index) => {
-        return (
-          <div className="pb-6" key={index}>
-            <Edit className="pt-0" todo={todo} />
-            <div className="flex justify-between">
-              <div className="w-[80%]">
-                {/* update Todo Button  */}
-                <div className="break-all flex text-xl font-bold text-white">
-                  {todo.title}
+      {todos.length === 0 ? (
+        <div>No todo</div>
+      ) : (
+        todos.map((todo, index) => {
+          return (
+            <div className="pb-6" key={index}>
+              <Edit className="pt-0" todo={todo} />
+              <div className="flex justify-between">
+                <div className="w-[80%]">
+                  {/* update Todo Button  */}
+                  <div className="break-all flex text-xl font-bold text-white">
+                    {todo.title}
+                  </div>
+                  {/* Description */}
+                  <div className="font-bold break-words text-gray-500">
+                    {todo.description}
+                  </div>
                 </div>
-                {/* Description */}
-                <div className="font-bold break-words text-gray-500">
-                  {todo.description}
+                <div className="flex justify-center gap-3 w-[20%]">
+                  {/* Complete and incomplete button */}
+                  <div onClick={() => updateCompleted(index)}>
+                    {isCompleted(todo.completed)}
+                  </div>
+                  {/* Delete Button : To delete the Particular Element form the Todos  */}
+                  <div onClick={() => deleteTodo(index)}>
+                    <img
+                      src={DeleteSvg}
+                      alt="delete.svg"
+                      className="cursor-pointer"
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-center gap-3 w-[20%]">
-                {/* Complete and incomplete button */}
-                <div onClick={() => updateCompleted(todo)}>
-                  {isCompleted(todo.completed)}
-                </div>
-                {/* Delete Button : To delete the Particular Element form the Todos  */}
-                <div onClick={() => deleteTodo(todo)}>
-                  <img
-                    src={DeleteSvg}
-                    alt="delete.svg"
-                    className="cursor-pointer"
-                  />
-                </div>
-              </div>
+              <hr />
             </div>
-            <hr />
-          </div>
-        );
-      })}
+          );
+        })
+      )}
     </div>
   );
 }

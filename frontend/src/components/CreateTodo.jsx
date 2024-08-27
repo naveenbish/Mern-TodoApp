@@ -7,12 +7,16 @@ export function CreateTodo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const { getTodos } = useGetTodos();
+  const token = localStorage.getItem("token");
 
   async function AddTodos() {
     await fetch(`${base_url}/todo/create`, {
       method: "POST",
       body: JSON.stringify({ title, description }),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
     });
     await getTodos();
   }
@@ -31,7 +35,7 @@ export function CreateTodo() {
         <input
           id="title"
           placeholder="Add Title"
-          className="border-blue-gray-200 text-white placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-2xl outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0"
+          className="border-blue-gray-200 text-white placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-2xl outline outline-0 transition-all focus:border-[#07f547] focus:outline-0 disabled:border-0"
           onChange={(e) => {
             const value = e.target.value;
             setTitle(value);
@@ -42,7 +46,7 @@ export function CreateTodo() {
         <textarea
           id="description"
           placeholder="Add Description"
-          className="border-blue-gray-200 text-white placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-lg outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0"
+          className="border-blue-gray-200 text-white placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-lg outline outline-0 transition-all focus:border-[#07f547] focus:outline-0 disabled:border-0"
           onChange={(e) => {
             const value = e.target.value;
             setDescription(value);

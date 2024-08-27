@@ -18,21 +18,34 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLength: 6,
   },
+  todos: [
+    {
+      title: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
+      completed: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  ],
 });
 
 // Create a Schema for Todo List
-const todoSchema = mongoose.Schema({
-  title: String,
-  description: String,
-  completed: Boolean,
-});
+// const todoSchema = mongoose.Schema({
+//   title: String,
+//   description: String,
+//   completed: Boolean,
+// });
 
 // Create a model from the schema user
 const User = mongoose.model("User", userSchema);
 // Create a model from the schema todo
-const Todo = mongoose.model("todos", todoSchema);
+// const Todo = mongoose.model("todos", todoSchema);
 
 module.exports = {
   User,
-  Todo,
 };

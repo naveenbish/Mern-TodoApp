@@ -2,35 +2,36 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ColorBar } from "../../components/ColorBar";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Signin() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [validate, setValidate] = useState(false)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [validate, setValidate] = useState(false);
   const navigate = useNavigate();
 
   const signinHandler = () => {
-    setValidate(true)
+    setValidate(true);
     try {
-      axios.post('http://localhost:3000/api/v1/user/signin/', {
-        email,
-        password
-      }).then((res) => {
-        console.log(res.data.statusCode)
-        if (res.data.statusCode == 1) {
-          navigate('/home');
-        } else if (res.data.statusCode == 0) (
-          toast.error("Invalid Creds", {
-            theme: "dark",
-          })
-        )
-      })
+      axios
+        .post("http://localhost:3000/api/v1/user/signin/", {
+          email,
+          password,
+        })
+        .then((res) => {
+          if (res.data.statusCode == 1) {
+            localStorage.setItem("token", res.data.token);
+            navigate("/home");
+          } else if (res.data.statusCode == 0)
+            toast.error("Invalid Creds", {
+              theme: "dark",
+            });
+        });
     } catch (err) {
-      console.log('just an error.')
+      console.log("just an error.");
     }
-  }
+  };
 
   return (
     <div className="flex flex-col h-screen justify-between">
@@ -43,24 +44,38 @@ export default function Signin() {
           <div className="text-2xl font-bold border-[#37694A] border-b-2">
             Sign In
           </div>
-          <InputFeilds id={"email"} placeholder={"Email"} onChange={(e) => {
-            setEmail(e.target.value)
-          }} />
-          <InputFeilds id={"password"} placeholder={"Password"} onChange={(e) => {
-            setPassword(e.target.value)
-          }} />
+          <InputFeilds
+            id={"email"}
+            placeholder={"Email"}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <InputFeilds
+            id={"password"}
+            placeholder={"Password"}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
           <Validation email={email} password={password} validate={validate} />
-          <button className="border m-auto w-[100px] bg-[#37694A] text-xl font-semibold p-2 rounded-md" onClick={signinHandler}>
+          <button
+            className="border m-auto w-[100px] bg-[#37694A] text-xl font-semibold p-2 rounded-md"
+            onClick={signinHandler}
+          >
             Sign In
           </button>
         </div>
         <div>
-          Already have an Account?{" "}
-          <span className="border-[#37694A] border-b-2 hover:text-green-500" onClick={() => navigate('/')}>
+          Don&apos;t have an Account?{" "}
+          <span
+            className="border-[#37694A] border-b-2 hover:text-green-500"
+            onClick={() => navigate("/")}
+          >
             Sign up
           </span>
         </div>
-      </div >
+      </div>
       <ToastContainer />
       <ColorBar />
     </div>
@@ -86,13 +101,13 @@ const Validation = (props) => {
       <div className="text-red-500">
         We are not happy with your email because it&aposs blank
       </div>
-    )
+    );
   }
   if (props.password.length < 6 && props.validate) {
     return (
       <div className="text-red-500">
         Please choose a password greater then 6 digits
       </div>
-    )
+    );
   }
-}
+};
