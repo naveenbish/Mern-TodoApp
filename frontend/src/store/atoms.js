@@ -1,3 +1,3 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
-export const todoAtom = atom({ key: 'todos', default: [] });
+export const todoAtom = atom({ key: "todos", default: [] });

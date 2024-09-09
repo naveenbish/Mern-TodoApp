@@ -4,19 +4,23 @@ import { ColorBar } from "../../components/ColorBar";
 import { RecoilRoot } from "recoil";
 import ExitSvg from "../../assets/exit.svg";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { base_url } from "../../config";
+
+import defaultAvatarImg from "../../../public/img/avatar/Avatar18.jpg";
+
 function Home() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   function Logout() {
     localStorage.removeItem("token");
     navigate("/");
   }
 
   useEffect(() => {
-    console.log("token", token);
     axios
       .post(
         `${base_url}/user/auth`,
@@ -28,7 +32,8 @@ function Home() {
         },
       )
       .then((res) => {
-        console.log(res.data);
+        setAvatarUrl(res.data.avatarImg);
+        setUserEmail(res.data.email);
         if (res.data.auth === 0) {
           navigate("/");
         }
@@ -38,17 +43,20 @@ function Home() {
   return (
     <RecoilRoot>
       <ColorBar />
-      <div className="bg-[#37694A] w-[100vw]">
+      <div className="bg-[#37694A] w-[100vw] py-10">
         {/* Upper Color Bar  */}
         <div className="flex flex-col  min-h-[95vh] justify-center">
-          <div className="w-full flex justify-end px-4">
-            <button
-              onClick={() => {
-                Logout();
-              }}
-            >
-              <img src={ExitSvg} alt="Exit button" width={40} />
-            </button>
+          <div className="w-full flex justify-between px-6">
+            <AvatarImg avatarUrl={avatarUrl} userEmail={userEmail} />
+            <div>
+              <button
+                onClick={() => {
+                  Logout();
+                }}
+              >
+                <img src={ExitSvg} alt="Exit button" width={40} />
+              </button>
+            </div>
           </div>
           <div className="border shadow-[0_0_10px_rgba(0,0,0,0.7)] p-5 rounded-[20px] m-2 min-h-[700px] bg-green-950">
             {/* <TodoHead /> */}
@@ -69,6 +77,23 @@ function Home() {
       </div>
       <ColorBar />
     </RecoilRoot>
+  );
+}
+
+function AvatarImg({ avatarUrl, userEmail }) {
+  return (
+    <>
+      <div className="flex gap-2">
+        <div className="h-12 w-12 rounded-lg">
+          {!avatarUrl?.length ? (
+            <img src={defaultAvatarImg} alt="Avatar" />
+          ) : (
+            <img src={avatarUrl} alt="Avatar" />
+          )}
+        </div>
+        <div className="flex items-end font-bold text-lg">{userEmail}</div>
+      </div>
+    </>
   );
 }
 

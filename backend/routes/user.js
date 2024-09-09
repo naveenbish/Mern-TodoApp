@@ -118,9 +118,11 @@ router.post("/auth", async (req, res) => {
     const decode = jwt.verify(token, JWT_SECRET);
     if (decode.userId) {
       const user = await User.findById(decode.userId);
+      const userAvatar = user.avatarImg;
       return res.json({
         auth: 1,
         email: user.email,
+        avatarImg: userAvatar,
       });
     } else {
       return res.json({

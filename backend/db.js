@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLength: 6,
   },
+  avatarImg: {
+    type: String,
+  },
   todos: [
     {
       title: {
@@ -34,18 +37,27 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-// Create a Schema for Todo List
-// const todoSchema = mongoose.Schema({
-//   title: String,
-//   description: String,
-//   completed: Boolean,
-// });
+// Schema for Avatar Images...
+const avatarSchema = new mongoose.Schema({
+  imageLink: [
+    {
+      imageName: {
+        type: String,
+        required: true,
+      },
+      cdnLink: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+});
 
 // Create a model from the schema user
 const User = mongoose.model("User", userSchema);
-// Create a model from the schema todo
-// const Todo = mongoose.model("todos", todoSchema);
+const Avatar = mongoose.model("Avatar", avatarSchema);
 
 module.exports = {
   User,
+  Avatar,
 };

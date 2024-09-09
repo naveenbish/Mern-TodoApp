@@ -69,7 +69,7 @@ export default function Signin() {
         <div>
           Don&apos;t have an Account?{" "}
           <span
-            className="border-[#37694A] border-b-2 hover:text-green-500"
+            className="border-[#37694A] border-b-2 hover:text-green-500 cursor-pointer"
             onClick={() => navigate("/")}
           >
             Sign up
