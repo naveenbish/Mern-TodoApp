@@ -55,11 +55,11 @@ export function Todos() {
               <div className="flex justify-between">
                 <div className="w-[80%]">
                   {/* update Todo Button  */}
-                  <div className="break-all flex text-xl font-bold text-white">
+                  <div className="break-all flex text-xl font-bold text-[#5c4a9c]">
                     {todo.title}
                   </div>
                   {/* Description */}
-                  <div className="font-bold break-words text-gray-500">
+                  <div className="font-bold break-words text-white">
                     {todo.description}
                   </div>
                 </div>

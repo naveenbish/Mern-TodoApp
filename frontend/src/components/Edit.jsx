@@ -31,7 +31,7 @@ export default function Edit({ todo }) {
       position="right center"
     >
       {(close) => (
-        <div className="border p-3 rounded-2xl bg-gray-400">
+        <div className="border p-3 rounded-md bg-[#5c4a9c]">
           <div className="flex justify-between">
             <input
               id="title"
@@ -47,7 +47,7 @@ export default function Edit({ todo }) {
             <input
               id="description"
               value={description}
-              className="border-blue-gray-200 text-gray-500 placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-lg outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0"
+              className="border-blue-gray-200 text-[#ffffff] placeholder-shown:border-blue-gray-200 disabled:bg-blue-gray-50 peer w-full h-full border-b bg-transparent pb-1.5 pt-4 font-mono font-bold text-lg outline outline-0 transition-all focus:border-gray-900 focus:outline-0 disabled:border-0"
               onChange={(e) => {
                 const value = e.target.value;
                 setDescription(value);
@@ -58,8 +58,8 @@ export default function Edit({ todo }) {
             onClick={UpdateTodos}
             className="flex pt-3 justify-center align-middle"
           >
-            <button onClick={close} className="font-extrabold text-xl">
-              Add
+            <button onClick={close} className="font-extrabold text-xl text-[#5c4a9c] bg-[#1a1a1a] px-2 py-1 rounded-md">
+              Save
             </button>
           </div>
         </div>

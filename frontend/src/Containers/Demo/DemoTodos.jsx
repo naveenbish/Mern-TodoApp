@@ -1,7 +1,7 @@
 import TickSvgRed from "./demoassets/tick_red.svg";
 import TickSvgGreen from "./demoassets/tick_green.svg";
 import DeleteSvg from "./demoassets/delete.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CreateTodo } from "./DemoCreateTodo";
 import Popup from "reactjs-popup";
 import EditSvg from "./demoassets/edit.svg";
@@ -73,9 +73,9 @@ export function Todos() {
     setTodos([...todos]);
   };
   return (
-    <div className="py-3 w-fit">
+    <div className="py-3 w-fit bg-[#1a1a1a]">
       <CreateTodo onSubmit={addTodo} />
-      <div className="font-bold text-white pt-10 border-green-400 border-b-2 w-fit mb-8">
+      <div className="font-bold text-white pt-10 border-[#5c4a9c] border-b-2 w-fit mb-8">
         Todos Listing
       </div>
       {todos.map((todo) => {
@@ -140,8 +140,7 @@ export function Todos() {
                 </div>
 
                 {/* update Todo Button  */}
-                <div className="flex text-xl font-bold text-black">
-                  {/* <Edit todo={todo} todos={todos} /> */}
+                <div className="flex text-xl font-bold">
                   {todo.title}
                 </div>
                 {/* Description */}
