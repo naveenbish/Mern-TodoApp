@@ -11,7 +11,7 @@ function Demo() {
         </div>
         <div className="flex flex-col w-full m-auto items-center justify-center py-6">
           <div className="text-5xl font-extrabold p-2 border-[#5c4a9c] border-b-2">Demo</div>
-          <div className="p-5 m-5 bg-[#1a1a1a]">
+          <div className="p-5 m-5 bg-[#1a1a1a] rounded-md max-w-[900px]">
             <div className="text-4xl font-extrabold text-[#5c4a9c] h-[45px] border-[#5c4a9c] border-b-2 w-fit">ToDO List</div>
             <Todos />
           </div>

@@ -39,18 +39,12 @@ const userSchema = new mongoose.Schema({
 
 // Schema for Avatar Images...
 const avatarSchema = new mongoose.Schema({
-  imageLink: [
-    {
-      imageName: {
-        type: String,
-        required: true,
-      },
-      cdnLink: {
-        type: String,
-        required: true,
-      },
+  avatarImages: {
+    urls: {
+      type: [String], // An array of strings for the URLs
+      required: true,
     },
-  ],
+  },
 });
 
 // Create a model from the schema user

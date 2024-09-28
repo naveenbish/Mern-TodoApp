@@ -41,40 +41,42 @@ export default function Signin() {
         <div className="text-4xl py-2 font-extrabold m-auto w-[200px] mb-10">
           TODO List
         </div>
-        <div className="flex flex-col px-10 py-5 m-4 rounded-md gap-10 bg-[#1a1a1a]">
-          <div className="text-2xl font-bold border-[#5c4a9c] border-b-2">
-            Sign In
-          </div>
-          <InputFeilds
-            id={"email"}
-            placeholder={"Email"}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <InputFeilds
-            id={"password"}
-            placeholder={"Password"}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <Validation email={email} password={password} validate={validate} />
-          <div>
-            <button
-              className="m-auto w-[100px] bg-[#000000] text-xl font-semibold p-2 rounded-md"
-              onClick={signinHandler}
-            >
+        <div className="flex justify-center items-center">
+          <div className="flex flex-col px-10 py-5 m-4 rounded-md min-w-[300px] max-w-[600px] w-full gap-10 bg-[#1a1a1a]">
+            <div className="text-2xl font-bold border-[#5c4a9c] border-b-2">
               Sign In
-            </button>
+            </div>
+            <InputFeilds
+              id={"email"}
+              placeholder={"Email"}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <InputFeilds
+              id={"password"}
+              placeholder={"Password"}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <Validation email={email} password={password} validate={validate} />
             <div>
-              Don&apos;t have an Account?{" "}
-              <span
-                className="border-[#5c4a9c] border-b-2 cursor-pointer"
-                onClick={() => navigate("/")}
+              <button
+                className="m-auto w-[100px] bg-[#000000] text-xl font-semibold p-2 rounded-md"
+                onClick={signinHandler}
               >
-                Sign up
-              </span>
+                Sign In
+              </button>
+              <div>
+                Don&apos;t have an Account?{" "}
+                <span
+                  className="border-[#5c4a9c] border-b-2 cursor-pointer"
+                  onClick={() => navigate("/")}
+                >
+                  Sign up
+                </span>
+              </div>
             </div>
           </div>
         </div>
