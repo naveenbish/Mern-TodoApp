@@ -46,7 +46,7 @@ export function Todos() {
   return (
     <div className="py-3">
       {todos.length === 0 ? (
-        <div>No todo</div>
+        <div>Add some Todo here.</div>
       ) : (
         todos.map((todo, index) => {
           return (

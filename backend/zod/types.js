@@ -15,8 +15,13 @@ const updateTodo = zod.object({
   description: zod.string().min(1),
 });
 
+const updateAvatar = zod.object({
+  newAvatarUrl: zod.string().url(),
+})
+
 module.exports = {
   createTodo,
   ComDelTodo,
   updateTodo,
+  updateAvatar,
 };

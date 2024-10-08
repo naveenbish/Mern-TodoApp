@@ -37,6 +37,7 @@ router.post("/signup", async (req, res) => {
   const user = await User.create({
     email: req.body.email,
     password: req.body.password,
+    avatarImg: 'https://cdn.errorop.com/project-todo/images/avatar/Avatar1.jpg',
   });
   const userId = user._id;
 
