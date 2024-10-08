@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { base_url } from "../config";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Signin() {
@@ -14,7 +15,7 @@ export default function Signin() {
     setValidate(true);
     try {
       axios
-        .post("http://localhost:3000/api/v1/user/signin/", {
+        .post(`${base_url}/user/signin/`, {
           email,
           password,
         })
