@@ -7,8 +7,9 @@ const cron = require("node-cron");
 const { exec } = require('child_process');
 const PORT = process.env.PORT || 3001;
 
-cron.schedule('*/14 * * * *', () => {
+cron.schedule('*/5 * * * *', () => {
   exec('curl https://mern-todoapp-backend-662y.onrender.com');
+  console.log('Corn running....')
 });
 
 app.use(cors());
